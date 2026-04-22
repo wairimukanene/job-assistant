@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Assistant</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">Job Assistant</div>
+  <nav class="sidebar-nav">
+    <button class="nav-item active" onclick="navigate('tailor')" id="nav-tailor">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      CV Tailor
+    </button>
+    <button class="nav-item" onclick="navigate('board')" id="nav-board">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Board
+    </button>
+    <button class="nav-item" onclick="navigate('analytics')" id="nav-analytics">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Analytics
+    </button>
+    <button class="nav-item" onclick="navigate('cvtracker')" id="nav-cvtracker">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      CV Tracker
+    </button>
+    <button class="nav-item" onclick="navigate('digest')" id="nav-digest">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Weekly Digest
+    </button>
+  </nav>
+  <div class="sidebar-footer">Phase 1–3 · v1.0</div>
+</aside>
+
+<main class="main">
+  <div id="page-tailor"></div>
+  <div id="page-board" class="hidden"></div>
+  <div id="page-analytics" class="hidden"></div>
+  <div id="page-cvtracker" class="hidden"></div>
+  <div id="page-digest" class="hidden"></div>
+</main>
+
+<!-- Load order matters: storage → data → modules → app last -->
+<script src="js/storage.js"></script>
+<script src="js/data.js"></script>
+<script src="js/tailor.js"></script>
+<script src="js/board.js"></script>
+<script src="js/analytics.js"></script>
+<script src="js/cvtracker.js"></script>
+<script src="js/digest.js"></script>
+<script src="js/secrets.stub.js"></script>
+<script src="js/secrets.local.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+# Local API key — never commit this file
+js/secrets.local.js
+
+.DS_Store
