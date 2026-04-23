@@ -168,8 +168,8 @@ const Tailor = {
     });
   },
 
-  CV_CONTEXT_CHARS: 14000,
-  JD_CONTEXT_CHARS: 12000,
+  CV_CONTEXT_CHARS: 32000,
+  JD_CONTEXT_CHARS: 16000,
 
   /** Anthropic Messages API: collect plain text from content blocks. */
   anthropicText(data) {
@@ -279,14 +279,14 @@ const Tailor = {
     const xmlBlocks = [];
     if (checked.cv) {
       xmlBlocks.push(
-        `<tailored_cv>Use ONLY these sections inside this tag, in order:
+        `<tailored_cv>IMPORTANT: You MUST include ALL of these sections in order, and you MUST NOT stop before completing the final section. Do NOT truncate or omit any section.
 1) Header/contact exactly as in CV (light cleanup allowed).
 2) **Professional Summary** (4-5 sentences).
 3) **Key Achievements** with exactly 5-6 bullets, each one line starting with "- ".
-4) **Professional Experience** with each role as: role title | company | dates, then 2-5 grounded bullets.
+4) **Professional Experience** with each role as: role title | company | dates, then 2-5 grounded bullets. Include ALL roles from the CV.
 5) **Education** (only what CV states).
 6) **Skills** grouped briefly (only tools/skills evidenced by CV text).
-Rules: no [X]/placeholder metrics; tools and numbers only if in the CV; retarget honest phrasing toward the JD; no fit-analysis commentary in this tag.</tailored_cv>`
+Rules: no [X]/placeholder metrics; tools and numbers only if in the CV; retarget honest phrasing toward the JD; no fit-analysis commentary in this tag. Close the tag ONLY after completing the Skills section.</tailored_cv>`
       );
     }
     if (checked.cl) {
@@ -313,12 +313,12 @@ Rules: no [X]/placeholder metrics; tools and numbers only if in the CV; retarget
 ${xmlBlocks.join('\n\n')}`;
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('/api/anthropic', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'claude-sonnet-4-6',
-          max_tokens: 8192,
+          max_tokens: 16384,
           system: this.tailorSystemPrompt(),
           messages: [{ role: 'user', content: userPrompt }],
         }),
@@ -348,11 +348,12 @@ ${xmlBlocks.join('\n\n')}`;
       const text = this.anthropicText(data);
       if (!text.trim()) {
         this.showRunError(
-          'Something went wrong — empty reply from the model. Check js/secrets.local.js, then try again with fewer outputs selected.'
+          'Something went wrong — empty reply from the model. Check .env.local, then try again with fewer outputs selected.'
         );
         return;
       }
 
+      console.log('[DEBUG] Full model response:', text);
       this.showResults(text, checked);
     } catch (e) {
       clearInterval(tick);

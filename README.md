@@ -18,33 +18,19 @@ A personal AI job search tool. Phase 1–3 complete.
 4. Copy the key (starts with `sk-ant-...`)
 
 ### Step 2 — Add your key
-1. Copy the example file: `cp js/secrets.local.example.js js/secrets.local.js`
-2. Open `js/secrets.local.js` and replace `sk-ant-api03-YOUR_KEY_HERE` with your real key from Anthropic.
+1. Copy the example file: `cp .env.local.example .env.local`
+2. Open `.env.local` and replace `sk-ant-api03-YOUR_KEY_HERE` with your real key from Anthropic.
 
-`js/secrets.local.js` is listed in `.gitignore` so it is not committed. If you ever pasted a key into `js/app.js` in an old version, rotate that key in the Anthropic console and use the new key only in `secrets.local.js`.
+`.env.local` is listed in `.gitignore` so it is not committed.
 
 ### Step 3 — Run it
 
-**Option A — Simplest (Python, no install needed)**
 ```bash
-cd job-assistant
-python3 -m http.server 3000
+npm install
+npm run dev
 ```
+
 Then open http://localhost:3000
-
-**Option B — Node.js**
-```bash
-npm install -g serve
-cd job-assistant
-serve .
-```
-Then open http://localhost:3000
-
-**Option C — VS Code**
-Install the "Live Server" extension, right-click index.html → Open with Live Server
-
-> ⚠️  Do NOT open index.html directly as a file (file://) — the browser will block API calls.
-> Always use a local server (http://localhost).
 
 ## File structure
 ```
