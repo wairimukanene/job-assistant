@@ -2,6 +2,7 @@
 const Tailor = {
   step: 1,
   activeTab: 'paste',
+  cvInputTab: 'upload',
   jdText: '',
   results: {},
   activeResult: '',
@@ -25,38 +26,53 @@ const Tailor = {
       <div id="t-page3" class="hidden">${this.renderStep3()}</div>
     `;
     this.bindStep1();
+    if (Storage.get('ap-hide-intro')?.value === '1') {
+      const intro = document.getElementById('t-intro-card');
+      if (intro) intro.classList.add('hidden');
+    }
+    this.switchCvTab(this.cvInputTab);
     if (Data.cvText) {
       document.getElementById('t-cv-text').value = Data.cvText;
       document.getElementById('t-btn1').disabled = false;
+      this.switchCvTab('paste');
     }
   },
 
   renderStep1() {
     return `
-      <div class="card intro-card">
+      <div class="card intro-card" id="t-intro-card">
         <div class="card-title">Get started in 3 steps</div>
         <ol class="intro-list">
           <li>Paste your CV as plain text.</li>
           <li>Add a job description or URL.</li>
           <li>Generate a tailored CV, cover letter, Q&amp;A, and fit score.</li>
         </ol>
+        <button class="btn-sm intro-hide-btn" type="button" onclick="Tailor.dismissIntro()">Hide</button>
       </div>
       <div class="card">
         <div class="card-title">Upload or paste your CV</div>
-        <div class="upload-zone" id="t-upload-zone" onclick="document.getElementById('t-cv-file').click()">
-          <div style="font-size:28px;margin-bottom:8px">📄</div>
-          <div style="font-size:14px;color:var(--text2)">Click to upload CV (PDF, TXT, DOCX)</div>
-          <div style="font-size:11px;color:var(--text3);margin-top:4px">or paste below</div>
-          <div style="font-size:11px;color:var(--amber);margin-top:8px;line-height:1.4">Tip: paste <strong>plain text</strong> for accurate tailoring. PDF/DOCX “upload” here only reads raw file bytes as text — use copy‑paste from your CV for best results.</div>
-          <div id="t-upload-name" style="font-size:13px;color:var(--green);font-weight:600;margin-top:6px"></div>
+        <div class="cv-mode-tabs">
+          <button id="t-cvtab-upload" class="rtab on" type="button" onclick="Tailor.switchCvTab('upload')">Upload file</button>
+          <button id="t-cvtab-paste" class="rtab" type="button" onclick="Tailor.switchCvTab('paste')">Paste text</button>
+        </div>
+        <div id="t-cv-pane-upload">
+          <div class="upload-zone" id="t-upload-zone" onclick="document.getElementById('t-cv-file').click()">
+            <div style="font-size:28px;margin-bottom:8px">📄</div>
+            <div style="font-size:14px;color:var(--text2)">Click to upload CV (PDF, TXT, DOCX)</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px">You can also switch to Paste text for best extraction quality.</div>
+            <div id="t-upload-name" style="font-size:13px;color:var(--green);font-weight:600;margin-top:6px"></div>
+          </div>
+        </div>
+        <div id="t-cv-pane-paste" class="hidden">
+          <div style="margin-top:12px">
+            <label>Paste CV text</label>
+            <textarea id="t-cv-text" placeholder="Paste your CV content here to get started..." style="min-height:180px" oninput="Tailor.checkStep1()"></textarea>
+          </div>
         </div>
         <input type="file" id="t-cv-file" accept=".pdf,.doc,.docx,.txt" style="display:none">
-        <div style="margin-top:12px">
-          <label>Or paste your CV text</label>
-          <textarea id="t-cv-text" placeholder="Paste your full CV here..." style="min-height:160px" oninput="Tailor.checkStep1()"></textarea>
-        </div>
-        <div class="privacy-note">
-          Your CV and applications are saved only in this browser. Use <strong>Refresh session</strong> to clear saved CV text while keeping your tracker history.
+        <div class="privacy-trust">
+          <span class="privacy-icon" aria-hidden="true">🛡️</span>
+          <span>Your CV data stays in this browser. Use <strong>Refresh session</strong> to clear saved CV text while keeping tracker history.</span>
         </div>
       </div>
       <button class="btn btn-full" id="t-btn1" onclick="Tailor.goTo(2)" disabled>Continue →</button>
@@ -65,24 +81,37 @@ const Tailor = {
 
   renderStep2() {
     return `
-      <button class="btn-sm" onclick="Tailor.goTo(1)" style="margin-bottom:1rem">← Back</button>
-      <div class="card">
-        <div class="card-title">Add the job</div>
-        <div style="display:flex;gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:1rem">
-          <button class="rtab on" id="t-tab-paste" onclick="Tailor.switchTab('paste')" style="flex:1;border:none;border-radius:0;padding:8px">Paste description</button>
-          <button class="rtab" id="t-tab-url" onclick="Tailor.switchTab('url')" style="flex:1;border:none;border-right:none;border-left:1px solid var(--border);border-radius:0;padding:8px">Job URL</button>
+      <div class="step2-head">
+        <button class="btn-sm" type="button" onclick="Tailor.goTo(1)">← Back</button>
+      </div>
+      <div class="card job-card">
+        <div class="card-title card-title-strong">Add the job</div>
+        <div class="job-tabs">
+          <button class="rtab on tab-strong" id="t-tab-paste" onclick="Tailor.switchTab('paste')" type="button"><span aria-hidden="true">📝</span> Paste description</button>
+          <button class="rtab tab-strong" id="t-tab-url" onclick="Tailor.switchTab('url')" type="button"><span aria-hidden="true">🔗</span> Job URL</button>
         </div>
         <div id="t-input-paste">
           <label>Paste the full job description</label>
           <textarea id="t-jd-text" placeholder="Paste job description here..." style="min-height:180px" oninput="Tailor.checkStep2()"></textarea>
+          <div class="hint-row">
+            <span id="t-jd-hint">Paste full job description including requirements/responsibilities.</span>
+            <span id="t-jd-count">0 chars</span>
+          </div>
         </div>
         <div id="t-input-url" class="hidden">
           <label>Job posting URL</label>
           <input type="url" id="t-jd-url" placeholder="https://company.com/jobs/..." oninput="Tailor.checkStep2()">
+          <div class="hint-row"><span id="t-url-hint">Paste a complete URL to enable Generate.</span></div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-title">What to generate</div>
+      <div class="card card-soft">
+        <div class="gen-head">
+          <div class="card-title" style="margin-bottom:0">What to generate</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn-sm" type="button" onclick="Tailor.setAllPills(true)">Select all</button>
+            <button class="btn-sm" type="button" onclick="Tailor.setAllPills(false)">Clear all</button>
+          </div>
+        </div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
           <label class="rtab tailor-pill on" id="t-p-cv" style="cursor:pointer" onclick="Tailor.togglePill(event,'t-p-cv')"><input type="checkbox" checked class="tailor-pill-cb" tabindex="-1" aria-hidden="true"> Tailored CV</label>
           <label class="rtab tailor-pill on" id="t-p-cl" style="cursor:pointer" onclick="Tailor.togglePill(event,'t-p-cl')"><input type="checkbox" checked class="tailor-pill-cb" tabindex="-1" aria-hidden="true"> Cover letter</label>
@@ -91,6 +120,7 @@ const Tailor = {
         </div>
       </div>
       <button class="btn btn-full" id="t-btn2" onclick="Tailor.run()" disabled>Generate ✦</button>
+      <div id="t-gen-help" class="gen-help">Paste a job description (50+ chars) or URL to enable Generate.</div>
     `;
   },
 
@@ -138,9 +168,28 @@ const Tailor = {
       document.getElementById('t-upload-name').textContent = '✓ ' + file.name;
       document.getElementById('t-upload-zone').classList.add('has-file');
       const r = new FileReader();
-      r.onload = ev => { Data.saveCV(ev.target.result); document.getElementById('t-cv-text').value = ev.target.result; this.checkStep1(); };
+      r.onload = ev => {
+        Data.saveCV(ev.target.result);
+        document.getElementById('t-cv-text').value = ev.target.result;
+        this.switchCvTab('paste');
+        this.checkStep1();
+      };
       r.readAsText(file);
     });
+  },
+
+  dismissIntro() {
+    const intro = document.getElementById('t-intro-card');
+    if (intro) intro.classList.add('hidden');
+    Storage.set('ap-hide-intro', '1');
+  },
+
+  switchCvTab(tab) {
+    this.cvInputTab = tab;
+    document.getElementById('t-cvtab-upload')?.classList.toggle('on', tab === 'upload');
+    document.getElementById('t-cvtab-paste')?.classList.toggle('on', tab === 'paste');
+    document.getElementById('t-cv-pane-upload')?.classList.toggle('hidden', tab !== 'upload');
+    document.getElementById('t-cv-pane-paste')?.classList.toggle('hidden', tab !== 'paste');
   },
 
   checkStep1() {
@@ -150,10 +199,20 @@ const Tailor = {
   },
 
   checkStep2() {
-    const paste = document.getElementById('t-jd-text')?.value.trim().length > 50;
-    const url = document.getElementById('t-jd-url')?.value.trim().length > 8;
+    const pasteText = document.getElementById('t-jd-text')?.value.trim() || '';
+    const pasteLen = pasteText.length;
+    const paste = pasteLen > 50;
+    const urlText = document.getElementById('t-jd-url')?.value.trim() || '';
+    const url = urlText.length > 8;
     const ok = this.activeTab === 'paste' ? paste : url;
-    document.getElementById('t-btn2').disabled = !ok;
+    const btn = document.getElementById('t-btn2');
+    if (btn) btn.disabled = !ok;
+    const count = document.getElementById('t-jd-count');
+    if (count) count.textContent = pasteLen + ' chars';
+    const help = document.getElementById('t-gen-help');
+    if (help) help.textContent = ok
+      ? 'Ready to generate.'
+      : 'Paste a job description (50+ chars) or URL to enable Generate.';
   },
 
   switchTab(t) {
@@ -163,6 +222,16 @@ const Tailor = {
     document.getElementById('t-input-paste').classList.toggle('hidden', t !== 'paste');
     document.getElementById('t-input-url').classList.toggle('hidden', t !== 'url');
     this.checkStep2();
+  },
+
+  setAllPills(on) {
+    ['t-p-cv', 't-p-cl', 't-p-qa', 't-p-fit'].forEach(function (id) {
+      const label = document.getElementById(id);
+      if (!label) return;
+      const cb = label.querySelector('input[type="checkbox"]');
+      if (cb) cb.checked = on;
+      label.classList.toggle('on', on);
+    });
   },
 
   togglePill(ev, id) {
@@ -179,6 +248,8 @@ const Tailor = {
       document.getElementById('t-page' + i).classList.toggle('hidden', i !== n);
       const s = document.getElementById('ts' + i);
       s.className = 'step' + (i < n ? ' done' : i === n ? ' active' : '');
+      const num = s.querySelector('.step-num');
+      if (num) num.textContent = i < n ? '✓' : String(i);
     });
   },
 
@@ -474,13 +545,92 @@ ${xmlBlocks.join('\n\n')}`;
     alert('Copied!');
   },
 
-  saveAndTrack() {
-    const role = prompt('Role title for tracker:');
-    const co = prompt('Company name:');
-    if (role && co) {
-      Data.add({ role, co, date: new Date().toISOString().slice(0,10), type: 'Implementation', status: 'Applied', cv: 'Custom' });
-      alert('Added to tracker!');
-      navigate('board');
+  extractJobMeta() {
+    const raw = (this.jdText || '').replace(/^Job URL:\s*/i, '').trim();
+    if (!raw) return { role: '', company: '' };
+
+    const lines = raw
+      .split('\n')
+      .map(function (l) { return l.trim(); })
+      .filter(function (l) { return l.length > 0; });
+
+    const clean = function (s) {
+      return (s || '')
+        .replace(/^[-•*\d.\)\s]+/, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    };
+
+    const fromLabel = function (arr, labels) {
+      for (var i = 0; i < arr.length; i++) {
+        var line = arr[i];
+        for (var j = 0; j < labels.length; j++) {
+          var m = line.match(labels[j]);
+          if (m && m[1]) return clean(m[1]);
+        }
+      }
+      return '';
+    };
+
+    var role = fromLabel(lines, [
+      /^(?:job\s*title|role|position|title)\s*[:\-]\s*(.+)$/i,
+    ]);
+    var company = fromLabel(lines, [
+      /^(?:company|employer|organization|organisation)\s*[:\-]\s*(.+)$/i,
+    ]);
+
+    if (!role || !company) {
+      for (var k = 0; k < Math.min(lines.length, 12); k++) {
+        var pair = lines[k].match(/^(.+?)\s+at\s+(.+)$/i);
+        if (pair) {
+          if (!role) role = clean(pair[1]);
+          if (!company) company = clean(pair[2]);
+          break;
+        }
+      }
     }
+
+    if (!role) {
+      var roleHints = /(engineer|developer|manager|specialist|analyst|consultant|lead|officer|associate|coordinator|architect|director|intern)/i;
+      for (var r = 0; r < Math.min(lines.length, 15); r++) {
+        if (roleHints.test(lines[r])) {
+          role = clean(lines[r].replace(/^job\s*title[:\-]\s*/i, ''));
+          break;
+        }
+      }
+    }
+
+    if (!company) {
+      var first = lines[0] || '';
+      if (/^https?:\/\//i.test(first)) {
+        try {
+          var u = new URL(first);
+          var host = u.hostname.replace(/^www\./i, '');
+          var parts = host.split('.');
+          company = clean(parts.length >= 2 ? parts[parts.length - 2] : host);
+          if (company) company = company.charAt(0).toUpperCase() + company.slice(1);
+        } catch (e) {
+          // no-op
+        }
+      }
+    }
+
+    return { role: role, company: company };
+  },
+
+  saveAndTrack() {
+    const meta = this.extractJobMeta();
+    const role = (meta.role || 'Untitled role').slice(0, 120);
+    const co = (meta.company || 'Unknown company').slice(0, 120);
+    Data.add({
+      role: role,
+      co: co,
+      date: new Date().toISOString().slice(0,10),
+      type: 'Implementation',
+      status: 'Applied',
+      cv: 'Custom'
+    });
+    alert('Added to tracker: ' + role + ' at ' + co);
+    navigate('board');
   }
 };

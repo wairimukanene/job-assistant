@@ -9,31 +9,62 @@
 <body>
 
 <aside class="sidebar">
-  <div class="sidebar-logo">Apply Pilot</div>
+  <div class="sidebar-top">
+    <div class="sidebar-logo">
+      <span class="logo-mark">AP</span>
+      <span class="logo-text">Apply Pilot</span>
+    </div>
+    <button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Toggle sidebar">⇔</button>
+  </div>
   <nav class="sidebar-nav">
     <button class="nav-item active" onclick="navigate('tailor')" id="nav-tailor">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      CV Tailor
+      <span class="nav-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+        </svg>
+      </span>
+      <span class="nav-label">CV Tailor</span>
     </button>
     <button class="nav-item" onclick="navigate('board')" id="nav-board">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-      Board
+      <span class="nav-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+      </span>
+      <span class="nav-label">Board</span>
     </button>
     <button class="nav-item" onclick="navigate('analytics')" id="nav-analytics">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-      Analytics
+      <span class="nav-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="20" x2="18" y2="10"></line>
+          <line x1="12" y1="20" x2="12" y2="4"></line>
+          <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+      </span>
+      <span class="nav-label">Analytics</span>
     </button>
     <button class="nav-item" onclick="navigate('cvtracker')" id="nav-cvtracker">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      CV Tracker
+      <span class="nav-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+      </span>
+      <span class="nav-label">CV Tracker</span>
     </button>
     <button class="nav-item" onclick="navigate('digest')" id="nav-digest">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Weekly Digest
+      <span class="nav-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </span>
+      <span class="nav-label">Weekly Digest</span>
     </button>
   </nav>
   <div class="sidebar-footer">
-    <button class="btn-sm btn-refresh sidebar-clear-btn" onclick="clearPersonalData()">Refresh session</button>
     <div style="margin-top:8px">Phase 1–3 · v1.0</div>
   </div>
 </aside>

@@ -51,25 +51,66 @@ export default function Home() {
   return (
     <>
       <aside className="sidebar">
-        <div className="sidebar-logo">Apply Pilot</div>
+        <div className="sidebar-top">
+          <div className="sidebar-logo">
+            <span className="logo-mark">AP</span>
+            <span className="logo-text">Apply Pilot</span>
+          </div>
+          <button className="sidebar-toggle" onClick={() => window.toggleSidebar?.()} type="button" aria-label="Toggle sidebar">
+            ⇔
+          </button>
+        </div>
         <nav className="sidebar-nav">
           <button className="nav-item active" onClick={() => window.navigate?.('tailor')} id="nav-tailor" type="button">
-            CV Tailor
+            <span className="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+            </span>
+            <span className="nav-label">CV Tailor</span>
           </button>
           <button className="nav-item" onClick={() => window.navigate?.('board')} id="nav-board" type="button">
-            Board
+            <span className="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+            </span>
+            <span className="nav-label">Board</span>
           </button>
           <button className="nav-item" onClick={() => window.navigate?.('analytics')} id="nav-analytics" type="button">
-            Analytics
+            <span className="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </span>
+            <span className="nav-label">Analytics</span>
           </button>
           <button className="nav-item" onClick={() => window.navigate?.('cvtracker')} id="nav-cvtracker" type="button">
-            CV Tracker
+            <span className="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+            </span>
+            <span className="nav-label">CV Tracker</span>
           </button>
           <button className="nav-item" onClick={() => window.navigate?.('digest')} id="nav-digest" type="button">
-            Weekly Digest
+            <span className="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </span>
+            <span className="nav-label">Weekly Digest</span>
           </button>
         </nav>
-        <div className="sidebar-footer">Next.js migration · v2.0</div>
+        <div className="sidebar-footer">
+          <div style={{ marginTop: '8px' }}>Apply Pilot · v1.0</div>
+        </div>
       </aside>
 
       <main className="main">

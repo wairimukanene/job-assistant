@@ -11,6 +11,24 @@ function navigate(page) {
   });
 }
 
+function applySidebarState() {
+  try {
+    var collapsed = localStorage.getItem('ap-sidebar-collapsed') === '1';
+    document.body.classList.toggle('sidebar-collapsed', collapsed);
+  } catch (e) {
+    // no-op
+  }
+}
+
+function toggleSidebar() {
+  var isCollapsed = document.body.classList.toggle('sidebar-collapsed');
+  try {
+    localStorage.setItem('ap-sidebar-collapsed', isCollapsed ? '1' : '0');
+  } catch (e) {
+    // no-op
+  }
+}
+
 function clearPersonalData() {
   const ok = window.confirm(
     'Refresh session by clearing saved CV text only? Your application tracker history will stay.'
@@ -22,7 +40,8 @@ function clearPersonalData() {
 
 // ── Boot ──────────────────────────────────────
 function boot() {
-  console.log('[DEBUG] Booting Job Assistant...');
+  console.log('[DEBUG] Booting Apply Pilot...');
+  applySidebarState();
   Data.load();
   Tailor.init();
   Board.init();
