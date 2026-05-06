@@ -9,7 +9,10 @@ const Tailor = {
   init() {
     const el = document.getElementById('page-tailor');
     el.innerHTML = `
-      <div class="page-header"><h1 class="page-title">CV Tailor</h1></div>
+      <div class="page-header">
+        <h1 class="page-title">CV Tailor</h1>
+        <button class="btn-sm" type="button" onclick="clearPersonalData()">Clear my data</button>
+      </div>
       <div class="steps">
         <div class="step active" id="ts1"><span class="step-num">1</span> Your CV</div>
         <div class="step-div"></div>

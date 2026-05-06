@@ -21,7 +21,7 @@ const Digest = {
     const thisWeek = Data.jobs.filter(j => (new Date() - new Date(j.date)) / 864e5 <= 7);
     const interviews = Data.jobs.filter(j => j.status === 'Interview');
     const offers = Data.jobs.filter(j => j.status === 'Offer');
-    const bestCV = Object.keys(cv).sort((a, b) => ((cvr[b] || 0) / cv[b]) - ((cvr[a] || 0) / cv[a]))[0];
+    const bestCV = Object.keys(cv).sort((a, b) => ((cvr[b] || 0) / cv[b]) - ((cvr[a] || 0) / cv[a]))[0] || 'General';
 
     const prompt = `You are a career coach writing a weekly job search digest. Be direct, warm, and actionable. Plain text only, no markdown.
 
@@ -42,12 +42,14 @@ Write a digest with these 4 labelled sections:
 Under 250 words. Be specific to the data.`;
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('/api/anthropic', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'claude-sonnet-4-6',
           max_tokens: 2048,
+          system:
+            'You are a career coach. Return plain text only. No markdown, no XML.',
           messages: [{ role: 'user', content: prompt }],
         }),
       });
@@ -55,7 +57,7 @@ Under 250 words. Be specific to the data.`;
       if (!res.ok || data.error) {
         const detail = (data.error && (data.error.message || data.error.type)) || res.statusText || 'Request failed';
         el.innerHTML =
-          '<div style="color:var(--red);font-size:13px">Could not generate digest. Check js/secrets.local.js and billing. ' +
+          '<div style="color:var(--red);font-size:13px">Could not generate digest. Check your `.env.local` Anthropic key and billing. ' +
           detail +
           '</div>';
         return;
@@ -78,7 +80,7 @@ Under 250 words. Be specific to the data.`;
         <div style="font-size:11px;color:var(--text3);margin-top:8px">${new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</div>`;
     } catch (e) {
       el.innerHTML =
-        '<div style="color:var(--red);font-size:13px">Could not generate digest. Check js/secrets.local.js and your network.</div>';
+        '<div style="color:var(--red);font-size:13px">Could not generate digest. Check your `.env.local` Anthropic key and your network.</div>';
     }
   }
 };
