@@ -11,6 +11,15 @@ function navigate(page) {
   });
 }
 
+function clearPersonalData() {
+  const ok = window.confirm(
+    'Clear all locally saved CV and application data on this browser? This cannot be undone.'
+  );
+  if (!ok) return;
+  Data.clearAll();
+  window.location.reload();
+}
+
 // ── Boot ──────────────────────────────────────
 function boot() {
   console.log('[DEBUG] Booting Job Assistant...');

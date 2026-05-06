@@ -8,7 +8,6 @@ const Data = {
     this.jobs = r ? JSON.parse(r.value) : [];
     const cv = Storage.get('ja-cv');
     this.cvText = cv ? cv.value : '';
-    if (!this.jobs.length) this.seed();
   },
 
   save() {
@@ -18,6 +17,13 @@ const Data = {
   saveCV(text) {
     this.cvText = text;
     Storage.set('ja-cv', text);
+  },
+
+  clearAll() {
+    this.jobs = [];
+    this.cvText = '';
+    Storage.remove('ja-jobs');
+    Storage.remove('ja-cv');
   },
 
   seed() {

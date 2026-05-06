@@ -47,6 +47,16 @@ const Board = {
 
   renderKanban() {
     const kb = document.getElementById('b-kanban'); kb.innerHTML = '';
+    if (!Data.jobs.length) {
+      kb.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-title">No applications yet</div>
+          <div class="empty-text">Add your first application to start tracking progress and analytics.</div>
+          <button class="btn" onclick="Board.openModal()">Add first application</button>
+        </div>
+      `;
+      return;
+    }
     this.COLS.forEach(col => {
       const cards = Data.jobs.filter(j => j.status === col);
       const div = document.createElement('div');

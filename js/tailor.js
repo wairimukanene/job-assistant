@@ -30,6 +30,14 @@ const Tailor = {
 
   renderStep1() {
     return `
+      <div class="card intro-card">
+        <div class="card-title">Get started in 3 steps</div>
+        <ol class="intro-list">
+          <li>Paste your CV as plain text.</li>
+          <li>Add a job description or URL.</li>
+          <li>Generate a tailored CV, cover letter, Q&amp;A, and fit score.</li>
+        </ol>
+      </div>
       <div class="card">
         <div class="card-title">Upload or paste your CV</div>
         <div class="upload-zone" id="t-upload-zone" onclick="document.getElementById('t-cv-file').click()">
@@ -43,6 +51,9 @@ const Tailor = {
         <div style="margin-top:12px">
           <label>Or paste your CV text</label>
           <textarea id="t-cv-text" placeholder="Paste your full CV here..." style="min-height:160px" oninput="Tailor.checkStep1()"></textarea>
+        </div>
+        <div class="privacy-note">
+          Your CV and applications are saved only in this browser. Use <strong>Clear my data</strong> in the sidebar before sharing this device.
         </div>
       </div>
       <button class="btn btn-full" id="t-btn1" onclick="Tailor.goTo(2)" disabled>Continue →</button>

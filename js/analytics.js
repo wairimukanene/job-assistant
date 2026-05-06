@@ -4,7 +4,7 @@ const Analytics = {
     document.getElementById('page-analytics').innerHTML = `
       <div class="page-header"><h1 class="page-title">Analytics</h1></div>
       <div class="stats-grid" id="a-stats"></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div class="analytics-grid">
         <div class="card"><div class="card-title">Applications per week</div><div id="a-week"></div></div>
         <div class="card"><div class="card-title">Response rate by type</div><div id="a-type"></div></div>
       </div>

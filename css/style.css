@@ -27,6 +27,7 @@ body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg);
 .nav-item:hover { background: var(--surface2); color: var(--text); }
 .nav-item.active { background: var(--surface2); color: var(--text); font-weight: 600; }
 .sidebar-footer { font-size: 11px; color: var(--text3); padding: 1rem 1.25rem 0; }
+.sidebar-clear-btn { width: 100%; }
 
 /* ── Main ────────────────────────────── */
 .main { flex: 1; padding: 2rem; overflow-y: auto; max-width: 900px; }
@@ -37,6 +38,9 @@ body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg);
 /* ── Cards ───────────────────────────── */
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
 .card-title { font-size: 14px; font-weight: 600; margin-bottom: 1rem; }
+.intro-card { background: #fdfcf8; }
+.intro-list { margin-left: 1.1rem; color: var(--text2); font-size: 13px; line-height: 1.7; }
+.privacy-note { margin-top: 10px; font-size: 12px; color: var(--text2); background: #f6f8fc; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; }
 
 /* ── Buttons ─────────────────────────── */
 .btn { padding: 8px 16px; font-size: 13px; font-weight: 600; border-radius: var(--radius-sm); border: none; background: var(--text); color: white; cursor: pointer; font-family: inherit; }
@@ -70,6 +74,9 @@ textarea { resize: vertical; min-height: 120px; }
 
 /* ── Kanban ──────────────────────────── */
 .kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 1rem; }
+.empty-state { grid-column: 1 / -1; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: center; }
+.empty-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.empty-text { font-size: 13px; color: var(--text2); margin-bottom: 12px; }
 .col { background: var(--surface2); border-radius: var(--radius); padding: 12px; min-height: 200px; }
 .col.drag-over { outline: 2px dashed var(--accent); }
 .col-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
@@ -91,6 +98,7 @@ textarea { resize: vertical; min-height: 120px; }
 .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
 .bar-fill { height: 100%; border-radius: 4px; background: var(--text); transition: width 0.5s ease; }
 .bar-val { font-size: 12px; color: var(--text3); width: 36px; }
+.analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
 /* ── Insights ────────────────────────── */
 .insight { padding: 10px 14px; font-size: 13px; color: var(--text2); border-left: 3px solid; margin-bottom: 8px; }
@@ -165,3 +173,23 @@ textarea { resize: vertical; min-height: 120px; }
 .step.active .step-num { background: var(--text); color: white; border-color: var(--text); }
 .step.done .step-num { background: #EAF3DE; color: var(--green); border-color: var(--green); }
 .step-div { flex: 1; height: 1px; background: var(--border); }
+
+@media (max-width: 980px) {
+  body { flex-direction: column; }
+  .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 0.9rem 0; }
+  .sidebar-logo { padding: 0 1rem 0.75rem; }
+  .sidebar-nav { flex-direction: row; gap: 6px; overflow-x: auto; padding: 0 1rem; }
+  .nav-item { white-space: nowrap; flex-shrink: 0; }
+  .sidebar-footer { padding: 0.75rem 1rem 0; display: flex; align-items: center; gap: 10px; }
+  .sidebar-clear-btn { width: auto; }
+  .main { max-width: 100%; padding: 1rem; }
+  .kanban { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 700px) {
+  .kanban { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .analytics-grid { grid-template-columns: 1fr; }
+  .step-div { display: none; }
+  .steps { flex-wrap: wrap; }
+}
