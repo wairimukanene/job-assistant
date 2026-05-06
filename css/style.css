@@ -1,31 +1,33 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #f9f9f7;
+  --bg: #f4f7fb;
   --surface: #ffffff;
-  --surface2: #f3f3f0;
-  --border: #e8e8e4;
+  --surface2: #f6f8fc;
+  --border: #e3eaf5;
   --text: #1a1a2e;
   --text2: #666;
   --text3: #999;
-  --accent: #1b6ca8;
+  --accent: #216dff;
   --green: #639922;
   --amber: #EF9F27;
   --red: #E24B4A;
   --blue: #378ADD;
   --radius: 10px;
   --radius-sm: 6px;
+  --shadow-sm: 0 4px 14px rgba(20, 39, 80, 0.06);
+  --shadow-md: 0 10px 30px rgba(17, 39, 86, 0.08);
 }
 
 body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; font-size: 14px; }
 
 /* ── Sidebar ─────────────────────────── */
-.sidebar { width: 200px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 1.5rem 0; flex-shrink: 0; }
+.sidebar { width: 220px; background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 1.5rem 0; flex-shrink: 0; }
 .sidebar-logo { font-size: 16px; font-weight: 700; color: var(--text); padding: 0 1.25rem 1.5rem; letter-spacing: -0.3px; }
 .sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: 2px; padding: 0 0.75rem; }
-.nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: var(--radius-sm); border: none; background: none; color: var(--text2); cursor: pointer; font-size: 13px; font-family: inherit; text-align: left; transition: background 0.1s; }
-.nav-item:hover { background: var(--surface2); color: var(--text); }
-.nav-item.active { background: var(--surface2); color: var(--text); font-weight: 600; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: var(--radius-sm); border: none; background: none; color: var(--text2); cursor: pointer; font-size: 13px; font-family: inherit; text-align: left; transition: background 0.15s, color 0.15s, transform 0.15s; }
+.nav-item:hover { background: var(--surface2); color: var(--text); transform: translateX(1px); }
+.nav-item.active { background: #eaf1ff; color: #124fb8; font-weight: 700; }
 .sidebar-footer { font-size: 11px; color: var(--text3); padding: 1rem 1.25rem 0; }
 .sidebar-clear-btn { width: 100%; }
 
@@ -36,20 +38,22 @@ body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg);
 .hidden { display: none !important; }
 
 /* ── Cards ───────────────────────────── */
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; box-shadow: var(--shadow-sm); }
 .card-title { font-size: 14px; font-weight: 600; margin-bottom: 1rem; }
 .intro-card { background: #fdfcf8; }
 .intro-list { margin-left: 1.1rem; color: var(--text2); font-size: 13px; line-height: 1.7; }
 .privacy-note { margin-top: 10px; font-size: 12px; color: var(--text2); background: #f6f8fc; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 10px; }
 
 /* ── Buttons ─────────────────────────── */
-.btn { padding: 8px 16px; font-size: 13px; font-weight: 600; border-radius: var(--radius-sm); border: none; background: var(--text); color: white; cursor: pointer; font-family: inherit; }
-.btn:hover { opacity: 0.85; }
+.btn { padding: 8px 16px; font-size: 13px; font-weight: 600; border-radius: var(--radius-sm); border: none; background: linear-gradient(135deg, #1e58d6, #2e86ff); color: white; cursor: pointer; font-family: inherit; box-shadow: 0 6px 16px rgba(32, 90, 214, 0.25); }
+.btn:hover { opacity: 0.95; transform: translateY(-1px); }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .btn-ghost { background: none; border: 1px solid var(--border); color: var(--text); }
 .btn-ghost:hover { background: var(--surface2); opacity: 1; }
 .btn-sm { padding: 5px 12px; font-size: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: none; color: var(--text); cursor: pointer; font-family: inherit; }
 .btn-sm:hover { background: var(--surface2); }
+.btn-refresh { background: #E6F1FB; color: #0C447C; border-color: #BFD8F3; }
+.btn-refresh:hover { background: #D7ECFF; }
 .btn-full { width: 100%; margin-top: 0.5rem; }
 
 /* ── Form elements ───────────────────── */
@@ -77,12 +81,12 @@ textarea { resize: vertical; min-height: 120px; }
 .empty-state { grid-column: 1 / -1; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: center; }
 .empty-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
 .empty-text { font-size: 13px; color: var(--text2); margin-bottom: 12px; }
-.col { background: var(--surface2); border-radius: var(--radius); padding: 12px; min-height: 200px; }
+.col { background: var(--surface2); border-radius: var(--radius); padding: 12px; min-height: 200px; border: 1px solid var(--border); }
 .col.drag-over { outline: 2px dashed var(--accent); }
 .col-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .col-title { font-size: 13px; font-weight: 700; }
 .col-count { font-size: 11px; color: var(--text3); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1px 8px; }
-.jcard { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 8px; cursor: grab; user-select: none; }
+.jcard { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 8px; cursor: grab; user-select: none; box-shadow: 0 3px 10px rgba(17, 39, 86, 0.05); }
 .jcard:active { cursor: grabbing; opacity: 0.6; }
 .jcard-role { font-size: 13px; font-weight: 600; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .jcard-co { font-size: 11px; color: var(--text2); margin-bottom: 8px; }

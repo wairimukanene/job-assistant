@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Job Assistant',
+  title: 'Apply Pilot',
   description: 'AI-assisted job search toolkit',
 };
 

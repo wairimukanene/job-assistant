@@ -13,10 +13,10 @@ function navigate(page) {
 
 function clearPersonalData() {
   const ok = window.confirm(
-    'Clear all locally saved CV and application data on this browser? This cannot be undone.'
+    'Refresh session by clearing saved CV text only? Your application tracker history will stay.'
   );
   if (!ok) return;
-  Data.clearAll();
+  Data.clearSession();
   window.location.reload();
 }
 

@@ -1,6 +1,6 @@
-# Job Assistant — Local Setup Guide
+# Apply Pilot — Local Setup Guide
 
-A personal AI job search tool. Phase 1–3 complete.
+Apply Pilot is a personal AI job search tool. Phase 1–3 complete.
 
 ## What's included
 - **CV Tailor** — upload your CV, paste a job description, get a tailored CV, cover letter, Q&A answers and fit score

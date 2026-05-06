@@ -26,6 +26,12 @@ const Data = {
     Storage.remove('ja-cv');
   },
 
+  clearSession() {
+    // Keep tracker history, clear sensitive CV input only.
+    this.cvText = '';
+    Storage.remove('ja-cv');
+  },
+
   seed() {
     const d = n => { const x = new Date(); x.setDate(x.getDate() - n); return x.toISOString().slice(0,10); };
     this.jobs = [

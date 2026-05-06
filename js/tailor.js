@@ -11,7 +11,7 @@ const Tailor = {
     el.innerHTML = `
       <div class="page-header">
         <h1 class="page-title">CV Tailor</h1>
-        <button class="btn-sm" type="button" onclick="clearPersonalData()">Clear my data</button>
+        <button class="btn-sm btn-refresh" type="button" onclick="clearPersonalData()">Refresh session</button>
       </div>
       <div class="steps">
         <div class="step active" id="ts1"><span class="step-num">1</span> Your CV</div>
@@ -56,7 +56,7 @@ const Tailor = {
           <textarea id="t-cv-text" placeholder="Paste your full CV here..." style="min-height:160px" oninput="Tailor.checkStep1()"></textarea>
         </div>
         <div class="privacy-note">
-          Your CV and applications are saved only in this browser. Use <strong>Clear my data</strong> in the sidebar before sharing this device.
+          Your CV and applications are saved only in this browser. Use <strong>Refresh session</strong> to clear saved CV text while keeping your tracker history.
         </div>
       </div>
       <button class="btn btn-full" id="t-btn1" onclick="Tailor.goTo(2)" disabled>Continue →</button>

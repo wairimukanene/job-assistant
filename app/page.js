@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <>
       <aside className="sidebar">
-        <div className="sidebar-logo">Job Assistant</div>
+        <div className="sidebar-logo">Apply Pilot</div>
         <nav className="sidebar-nav">
           <button className="nav-item active" onClick={() => window.navigate?.('tailor')} id="nav-tailor" type="button">
             CV Tailor
