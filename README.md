@@ -1,6 +1,6 @@
 # Apply Pilot — Local Setup Guide
 
-Apply Pilot is a personal AI job search tool. Phase 1–3 complete.
+Apply Pilot is a personal AI job search tool. Phase 1-6 in progress.
 
 ## What's included
 - **CV Tailor** — upload your CV, paste a job description, get a tailored CV, cover letter, Q&A answers and fit score
@@ -8,6 +8,8 @@ Apply Pilot is a personal AI job search tool. Phase 1–3 complete.
 - **Analytics** — weekly activity chart, response rate by role type, activity heatmap, insights
 - **CV Tracker** — which CV version gets the most responses, time-to-response by company
 - **Weekly Digest** — AI-generated weekly summary with action plan
+- **Interview Prep** — likely interview questions, answer feedback, competency bank, salary scripts
+- **Auto-Apply** — review queue for extension-captured autofill drafts (manual approval only)
 
 ## Setup (2 minutes)
 
@@ -53,6 +55,7 @@ All your data is stored in your browser's localStorage — nothing is sent anywh
 - Job discovery — search and match roles automatically
 - Interview prep — AI generates likely questions per role
 - Auto-fill — browser extension to fill application forms
+- Review queue — approve/reject auto-fill drafts before tracking
 - Mobile app
 
 ## Cost

@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Apply Pilot Auto-Apply",
+  "version": "0.1.0",
+  "description": "Reads job application forms and prepares autofill drafts for review.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "Apply Pilot",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

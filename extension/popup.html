@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apply Pilot Extension</title>
+    <style>
+      body { font-family: Arial, sans-serif; width: 340px; margin: 0; padding: 12px; color: #1a1a1a; }
+      h3 { margin: 0 0 8px; font-size: 16px; }
+      label { font-size: 12px; color: #555; display: block; margin: 8px 0 4px; }
+      input, textarea { width: 100%; box-sizing: border-box; padding: 8px; font-size: 12px; }
+      textarea { min-height: 64px; resize: vertical; }
+      .row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+      button { font-size: 12px; padding: 7px 10px; cursor: pointer; }
+      #out { margin-top: 10px; font-size: 11px; color: #333; white-space: pre-wrap; background: #f6f8ff; border: 1px solid #dbe4ff; border-radius: 8px; padding: 8px; max-height: 140px; overflow: auto; }
+      .hint { font-size: 11px; color: #666; margin-top: 8px; }
+    </style>
+  </head>
+  <body>
+    <h3>Apply Pilot Auto-Apply</h3>
+    <label>Apply Pilot URL</label><input id="p-appUrl" type="text" placeholder="http://localhost:3000" />
+    <label>Full name</label><input id="p-fullName" type="text" />
+    <label>Email</label><input id="p-email" type="text" />
+    <label>Phone</label><input id="p-phone" type="text" />
+    <label>LinkedIn</label><input id="p-linkedin" type="text" />
+    <label>GitHub</label><input id="p-github" type="text" />
+    <label>Portfolio</label><input id="p-website" type="text" />
+    <label>Short cover letter template</label><textarea id="p-coverLetter"></textarea>
+    <div class="row">
+      <button id="saveProfile">Save profile</button>
+      <button id="previewFill">Preview autofill</button>
+      <button id="captureDraft">Capture draft</button>
+      <button id="sendDraft">Send draft to app</button>
+    </div>
+    <div id="out"></div>
+    <div class="hint">Copy captured JSON draft into Apply Pilot > Auto-Apply > Import draft.</div>
+    <script src="popup.js"></script>
+  </body>
+  </html>

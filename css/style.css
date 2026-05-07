@@ -65,6 +65,46 @@ body { font-family: Inter, system-ui, -apple-system, sans-serif; background: rad
 .card-soft { background: #fbfcff; }
 .gen-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
 .gen-help { margin-top: 8px; font-size: 12px; color: var(--text3); }
+.discovery-grid { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+.discovery-actions { display: flex; }
+.discovery-filter-row { margin-top: 8px; }
+.discovery-check { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.discovery-check input { width: 14px; height: 14px; }
+.d-job { margin-bottom: 10px; }
+.d-job-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.d-job-title { font-size: 16px; font-weight: 700; }
+.d-job-meta { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.d-score { font-size: 12px; font-weight: 700; color: #124fb8; background: #eaf1ff; border: 1px solid #cfe0ff; border-radius: 999px; padding: 4px 9px; white-space: nowrap; }
+.d-elig { font-size: 11px; display: inline-block; margin-top: 8px; border-radius: 999px; padding: 4px 8px; border: 1px solid; }
+.d-elig.eligible { color: #215c14; background: #eaf3de; border-color: #cfe5b3; }
+.d-elig.maybe { color: #7a4a0b; background: #faeeda; border-color: #f0d9ad; }
+.d-elig.ineligible { color: #842626; background: #fcebeb; border-color: #f5c9c9; }
+.d-desc { font-size: 13px; color: var(--text2); margin-top: 9px; line-height: 1.6; }
+.aa-item { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; margin-top: 10px; background: #fbfcff; }
+.aa-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.aa-status { font-size: 11px; border-radius: 999px; padding: 3px 8px; border: 1px solid; text-transform: capitalize; }
+.aa-pending { color: #7a4a0b; background: #faeeda; border-color: #f0d9ad; }
+.aa-approved { color: #215c14; background: #eaf3de; border-color: #cfe5b3; }
+.aa-rejected { color: #842626; background: #fcebeb; border-color: #f5c9c9; }
+.interview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: end; }
+.interview-actions { display: flex; justify-content: flex-end; }
+.ip-question {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--text);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.ip-question:hover { background: var(--surface2); border-color: #cfe0ff; }
+.ip-bank-group { margin-bottom: 12px; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: #fbfcff; }
+.ip-bank-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #124fb8; }
+.ip-bank-item { font-size: 13px; color: var(--text2); line-height: 1.6; }
 
 /* ── Buttons ─────────────────────────── */
 .btn { padding: 9px 16px; font-size: 13px; font-weight: 700; border-radius: var(--radius-sm); border: none; background: linear-gradient(135deg, #1a56d6, #2e86ff); color: white; cursor: pointer; font-family: inherit; box-shadow: 0 8px 18px rgba(32, 90, 214, 0.32); }
@@ -112,6 +152,7 @@ textarea { resize: vertical; min-height: 120px; }
 .jcard:active { cursor: grabbing; opacity: 0.6; }
 .jcard-role { font-size: 13px; font-weight: 600; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .jcard-co { font-size: 11px; color: var(--text2); margin-bottom: 8px; }
+.jcard-method { font-size: 10px; color: #124fb8; background: #eaf1ff; border: 1px solid #cfe0ff; border-radius: 999px; padding: 2px 6px; display: inline-block; margin-bottom: 8px; }
 .jcard-footer { display: flex; justify-content: space-between; align-items: center; }
 .jcard-date { font-size: 10px; color: var(--text3); }
 .cv-badge { font-size: 10px; padding: 1px 6px; border-radius: 8px; background: #E6F1FB; color: #0C447C; }
@@ -235,4 +276,7 @@ body.sidebar-collapsed .sidebar-clear-btn::after { content: '↻'; font-size: 14
   .steps { flex-wrap: wrap; }
   .card-title-strong { font-size: 20px; }
   .hint-row { flex-direction: column; gap: 2px; }
+  .discovery-grid { grid-template-columns: 1fr; }
+  .interview-grid { grid-template-columns: 1fr; }
+  .interview-actions { justify-content: flex-start; }
 }

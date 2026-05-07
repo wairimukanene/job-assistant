@@ -5,7 +5,7 @@
 
 // ── Router ────────────────────────────────────
 function navigate(page) {
-  ['tailor', 'board', 'analytics', 'cvtracker', 'digest'].forEach(function (p) {
+  ['tailor', 'discovery', 'interview', 'autoapply', 'board', 'analytics', 'cvtracker', 'digest'].forEach(function (p) {
     document.getElementById('page-' + p).classList.toggle('hidden', p !== page);
     document.getElementById('nav-' + p).classList.toggle('active', p === page);
   });
@@ -44,6 +44,9 @@ function boot() {
   applySidebarState();
   Data.load();
   Tailor.init();
+  Discovery.init();
+  InterviewPrep.init();
+  AutoApply.init();
   Board.init();
   Analytics.init();
   CVTracker.init();

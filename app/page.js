@@ -36,6 +36,9 @@ export default function Home() {
       '/js/storage.js',
       '/js/data.js',
       '/js/tailor.js',
+      '/js/discovery.js',
+      '/js/interview.js',
+      '/js/autoapply.js',
       '/js/board.js',
       '/js/analytics.js',
       '/js/cvtracker.js',
@@ -69,6 +72,33 @@ export default function Home() {
               </svg>
             </span>
             <span className="nav-label">CV Tailor</span>
+          </button>
+          <button className="nav-item" onClick={() => window.navigate?.('discovery')} id="nav-discovery" type="button">
+            <span className="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
+            <span className="nav-label">Discovery</span>
+          </button>
+          <button className="nav-item" onClick={() => window.navigate?.('interview')} id="nav-interview" type="button">
+            <span className="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 19V6"></path>
+                <path d="M5 12l7-7 7 7"></path>
+              </svg>
+            </span>
+            <span className="nav-label">Interview Prep</span>
+          </button>
+          <button className="nav-item" onClick={() => window.navigate?.('autoapply')} id="nav-autoapply" type="button">
+            <span className="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="4" width="18" height="14" rx="2"></rect>
+                <path d="M8 20h8"></path>
+              </svg>
+            </span>
+            <span className="nav-label">Auto-Apply</span>
           </button>
           <button className="nav-item" onClick={() => window.navigate?.('board')} id="nav-board" type="button">
             <span className="nav-ico" aria-hidden="true">
@@ -115,6 +145,9 @@ export default function Home() {
 
       <main className="main">
         <div id="page-tailor"></div>
+        <div id="page-discovery" className="hidden"></div>
+        <div id="page-interview" className="hidden"></div>
+        <div id="page-autoapply" className="hidden"></div>
         <div id="page-board" className="hidden"></div>
         <div id="page-analytics" className="hidden"></div>
         <div id="page-cvtracker" className="hidden"></div>

@@ -68,6 +68,7 @@ const Board = {
         card.innerHTML = `
           <div class="jcard-role">${j.role}</div>
           <div class="jcard-co">${j.co}</div>
+          <div class="jcard-method">${j.applicationMethod === 'auto' ? 'Auto-filled' : 'Manual'}</div>
           <div class="jcard-footer">
             <span class="jcard-date">${Data.fmt(j.date)}</span>
             <span class="cv-badge">${j.cv || 'General'}</span>

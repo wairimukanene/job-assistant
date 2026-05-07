@@ -26,6 +26,33 @@
       </span>
       <span class="nav-label">CV Tailor</span>
     </button>
+    <button class="nav-item" onclick="navigate('discovery')" id="nav-discovery">
+      <span class="nav-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </span>
+      <span class="nav-label">Discovery</span>
+    </button>
+    <button class="nav-item" onclick="navigate('interview')" id="nav-interview">
+      <span class="nav-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 19V6"></path>
+          <path d="M5 12l7-7 7 7"></path>
+        </svg>
+      </span>
+      <span class="nav-label">Interview Prep</span>
+    </button>
+    <button class="nav-item" onclick="navigate('autoapply')" id="nav-autoapply">
+      <span class="nav-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="14" rx="2"></rect>
+          <path d="M8 20h8"></path>
+        </svg>
+      </span>
+      <span class="nav-label">Auto-Apply</span>
+    </button>
     <button class="nav-item" onclick="navigate('board')" id="nav-board">
       <span class="nav-ico" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,6 +98,9 @@
 
 <main class="main">
   <div id="page-tailor"></div>
+  <div id="page-discovery" class="hidden"></div>
+  <div id="page-interview" class="hidden"></div>
+  <div id="page-autoapply" class="hidden"></div>
   <div id="page-board" class="hidden"></div>
   <div id="page-analytics" class="hidden"></div>
   <div id="page-cvtracker" class="hidden"></div>
@@ -81,6 +111,9 @@
 <script src="js/storage.js"></script>
 <script src="js/data.js"></script>
 <script src="js/tailor.js"></script>
+<script src="js/discovery.js"></script>
+<script src="js/interview.js"></script>
+<script src="js/autoapply.js"></script>
 <script src="js/board.js"></script>
 <script src="js/analytics.js"></script>
 <script src="js/cvtracker.js"></script>
