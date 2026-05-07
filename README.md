@@ -1,15 +1,37 @@
 # Apply Pilot — Local Setup Guide
 
-Apply Pilot is a personal AI job search tool. Phase 1-6 in progress.
+Apply Pilot is an AI job search copilot. Phases 1-6 are implemented in the current build, with Phase 7 (Product and Monetisation) planned next.
 
-## What's included
-- **CV Tailor** — upload your CV, paste a job description, get a tailored CV, cover letter, Q&A answers and fit score
-- **Board** — Kanban tracker (drag between Applied → Interview → Offer → Rejected)
-- **Analytics** — weekly activity chart, response rate by role type, activity heatmap, insights
-- **CV Tracker** — which CV version gets the most responses, time-to-response by company
-- **Weekly Digest** — AI-generated weekly summary with action plan
-- **Interview Prep** — likely interview questions, answer feedback, competency bank, salary scripts
-- **Auto-Apply** — review queue for extension-captured autofill drafts (manual approval only)
+## Current product status
+
+### Phase 1 — CV Tailor
+- Upload or paste CV text
+- Paste JD or job URL
+- Generate tailored CV, cover letter, Q&A and fit analysis
+
+### Phase 2 — Application Tracker
+- Kanban board with drag/drop stages
+- Manual and auto-filled application tracking
+
+### Phase 3 — Intelligence
+- Response-rate and activity analytics
+- CV version tracking and weekly digest
+
+### Phase 4 — Job Discovery
+- Multi-source role search by title/location
+- CV-aware ranking and eligibility labels
+- Save roles directly to board
+
+### Phase 5 — Interview Prep
+- Likely interview questions per role
+- Practice answer feedback
+- Competency-based question bank
+- Salary negotiation scripts
+
+### Phase 6 — Auto-Apply
+- Browser extension scaffold for form reading and preview autofill
+- Review queue (approve/reject before tracking)
+- Direct extension-to-app draft sync via API bridge
 
 ## Setup (2 minutes)
 
@@ -38,25 +60,34 @@ Then open http://localhost:3000
 ```
 job-assistant/
 ├── index.html          — app shell and sidebar
+├── extension/          — Chrome extension scaffold for Phase 6
 ├── css/
 │   └── style.css       — all styles
 ├── js/
 │   ├── storage.js      — localStorage wrapper
 │   ├── data.js         — shared job data and helpers
 │   ├── tailor.js       — Phase 1: CV tailor
-│   ├── app.js          — router + Board + Analytics + CV Tracker + Digest
+│   ├── discovery.js    — Phase 4: job discovery
+│   ├── interview.js    — Phase 5: interview prep
+│   ├── autoapply.js    — Phase 6: review queue
+│   ├── app.js          — router + module bootstrapping
+├── app/api/            — Next.js API routes (Anthropic, jobs search, auto-apply bridge)
 └── README.md
 ```
 
-## Data
-All your data is stored in your browser's localStorage — nothing is sent anywhere except to the Anthropic API for AI generation. Clear your browser data to reset.
+## Data and privacy
+- Core app data currently uses browser localStorage.
+- AI generation requests are proxied through server API routes to Anthropic.
+- Auto-apply bridge queue is short-lived in server memory before sync into local review queue.
+- Nothing is auto-submitted to job sites.
 
-## Coming next (Phase 4+)
-- Job discovery — search and match roles automatically
-- Interview prep — AI generates likely questions per role
-- Auto-fill — browser extension to fill application forms
-- Review queue — approve/reject auto-fill drafts before tracking
-- Mobile app
+## Next (Phase 7 — Product and Monetisation)
+- User accounts + cloud sync (moving beyond localStorage)
+- Landing page + waitlist
+- Stripe + M-Pesa payment integration
+- B2B dashboard for coaches (multi-candidate management)
+- Coach analytics (response rates, placement rates)
+- Mobile app (React Native)
 
 ## Cost
 Anthropic API calls cost roughly $0.003–0.005 per generation (tailored CV + cover letter). At 5 applications/day that's under $1/month.
